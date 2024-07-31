@@ -6,6 +6,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
+# Charger les données
+df = pd.read_csv('/content/AmesHousing.csv')
+
+# Nettoyage des données
+df.columns = df.columns.str.strip()
+df.fillna(df.median(numeric_only=True), inplace=True)
+df['Year Built'] = pd.to_numeric(df['Year Built'], errors='coerce')
+
+# Calcul de l'âge de la maison
+df['Age'] = df['Yr Sold'] - df['Year Built']
+
+# Encodage des variables catégorielles
+df_encoded = pd.get_dummies(df, columns=['Neighborhood', 'House Style'])
 
 # Visualisation de la distribution de SalePrice
 plt.figure(figsize=(10, 6))
@@ -67,3 +80,4 @@ r2 = r2_score(y_test, y_pred)
 
 print(f'Erreur Quadratique Moyenne (MSE) : {mse}')
 print(f'Coefficient de Détermination (R²) : {r2}')
+
