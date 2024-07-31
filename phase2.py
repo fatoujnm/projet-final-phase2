@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Charger les données
-df = pd.read_csv('/content/AmesHousing.csv')
+df = pd.read_csv('/AmesHousing.csv')
 
 # Nettoyage des données
 df.columns = df.columns.str.strip()
